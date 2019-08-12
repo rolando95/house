@@ -12,9 +12,12 @@ var canvas = document.getElementById("renderCanvas");
 var engine = new Engine(canvas);
 engine.init();
 
+var loading = document.getElementById("loading");
+
 console.log("SCENE");
 var scene = new Scene(engine);
 scene.init();
+scene.setClearColor(0,0,0.1);
 // scene.setClearColor(0.8,0.8,0.8);
 // scene.setFogColor(scene.getClearColor());
 // scene.setFogDensity(0.05);
@@ -28,9 +31,9 @@ scene.init();
 // var light2 = new Light(scene);
 // light2.setAmbientLight()
 
-console.log("TEXTURE");
-var eqTexture = new Texture(scene);
-eqTexture.setEquiRectangularTexture("texturas/vista360.png", 64);
+// console.log("TEXTURE");
+// var eqTexture = new Texture(scene);
+// eqTexture.setEquiRectangularTexture("texturas/vista360.png", 64);
 
 console.log("MESH");
 var target = new Mesh(scene);
@@ -56,7 +59,6 @@ camera.setTarget(target.__getMesh());
 console.log("IMPORT");
 var watch = new ExternalImport(scene);
 watch.importBabylonFile("casaBake.babylon",()=>{
-
     // setMaterialColor("reloj.strap2",0.549,0.294,0.145);
 
     // var clockFace = watch.getSkeletons()[0];
@@ -82,7 +84,7 @@ watch.importBabylonFile("casaBake.babylon",()=>{
     //     clockFace.setBoneRotation(3, 0,0,-seconds*2*Math.PI);
     // })
 
-    var loading = document.getElementById("loading");
+
     loading.parentNode.removeChild(loading);
 });
 
