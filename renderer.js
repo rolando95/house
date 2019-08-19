@@ -270,6 +270,40 @@ class ExternalImport extends Component{
         request.send();
     }
 
+
+
+    importFromGLTFFile(path, onLoadedCall)
+    {
+        // this._path = path;
+        // var request = new XMLHttpRequest();
+        // request.open("GET", path);
+
+        // var obj = this;
+        // request.onload = ()=>{
+        //     this.setFromGLTFStrData(request.response);
+        //     if(onLoadedCall !== undefined)
+        //     {
+        //         onLoadedCall();
+        //     }
+        // }
+        
+        // request.onerror = function(){
+        //     console.log("ERROR ON LOAD FILE: "+path);
+        // }
+        
+        // request.send();
+        //BABYLON.SceneLoader.Append("./", path, this._scene.__getScene(), onLoadedCall);
+        BABYLON.SceneLoader.ImportMesh(null, "./", path, this._scene.__getScene(), function (meshes, particleSystems, skeletons) {
+            // do something with the meshes and skeletons
+            // particleSystems are always null for glTF assets
+
+            if(onLoadedCall !== undefined)
+            {
+                onLoadedCall();
+            }
+        });
+    }
+
     getPath()
     {
         return this._path;
@@ -289,6 +323,11 @@ class Light extends Component{
         this._scene = scene;
         this._light = null
         _lightCount += 1;
+    }
+
+    setIntensity(value)
+    {
+        this._light.intensity = value;
     }
 
     setPointLight(x,y,z)
