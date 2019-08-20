@@ -34,7 +34,8 @@ light2.setIntensity(.2);
 
 console.log("TEXTURE");
 var eqTexture = new Texture(scene);
-eqTexture.setEquiRectangularTexture("texturas/vista360.png", 64);
+eqTexture.setEquiRectangularTexture("texturas/fondoNoche.jpg", 128);
+//eqTexture.setEquiRectangularTexture("texturas/vista360.jpg", 32);
 
 console.log("MESH");
 var target = new Mesh(scene);
@@ -69,24 +70,41 @@ watch.importBabylonFile("casaBake2.0.babylon",()=>{
     for(var j=0; j<meshes.length; ++j)
     {
         var _mesh = meshes[j].__getMesh();
-        if(_mesh.name==="paredes_mansion" || _mesh.name==="pared_cuarto_mansion")
+        if(_mesh.name==="paredes_mansion" || _mesh.name==="pared_cuarto_mansion" || _mesh.name==="piso1_mansion")
         {
             reflejos.push(_mesh);
         }
-        
+
     }
 
 
-    // for(var j=0; j<meshes.length; ++j)
-    // {
-    //     var _mesh = meshes[j].__getMesh();
-    //     console.log(_mesh.name);
-    //     if(_mesh.name==="piso0_mansion")
-    //     {
+    for(var j=0; j<meshes.length; ++j)
+    {
+        var _mesh = meshes[j].__getMesh();
+        console.log(_mesh.name);
+        if(_mesh.name==="piso0_mansion" || _mesh.name==="piso1_mansion")
+        {
+            _mesh.material.reflectionTexture = new BABYLON.MirrorTexture("mirror", {ratio: 0.5}, scene.__getScene(), true);
+            if( _mesh.name==="piso1_mansion") _mesh.material.reflectionTexture.mirrorPlane = new BABYLON.Plane(0, -1.0, 0, 3);
+            else _mesh.material.reflectionTexture.mirrorPlane = new BABYLON.Plane(0, -1.0, 0, 0);
+            _mesh.material.reflectionTexture.renderList = reflejos;
+            _mesh.material.reflectionTexture.level = 0.1;
+            _mesh.material.reflectionTexture.adaptiveBlurKernel = 16;
+            //_mesh.position = new BABYLON.Vector3(0, -2, 0);
+        }
 
-    //     }
-        
-    // }
+
+        if(_mesh.name==="vidrio")
+        {
+            const vidrio = new Material(scene);
+            vidrio.setPBRMaterial();
+            vidrio.setAlpha(0.15);
+            vidrio.setReflectionTexture(eqTexture);
+            meshes[j].setMaterial(vidrio);
+        }
+
+
+    }
 
     loading.parentNode.removeChild(loading);
 });
@@ -110,5 +128,5 @@ function setMaterialColor(materialName, r, g, b)
     {
         materialSelected.diffuseColor = getVec3Color(r, g, b);
     }
-    
+
 }
