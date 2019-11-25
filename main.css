@@ -1,0 +1,12 @@
+a-scene { 
+    display: block; 
+    width: 100%; 
+    padding:0;
+}
+
+#loading {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
