@@ -8,19 +8,22 @@
   </head>
   <body>
     <a-scene 
+    environment
       fog="type: linear; color: #000015; near:0.1; far:200" 
-      renderer='logarithmicDepthBuffer: true;'
-      loading-screen="dotsColor: white; backgroundColor: #001"
+      loading-screen="dotsColor: white; backgroundColor: #000015"
       vr-mode-ui="enabled: false"
+      stats
     >
         <a-assets renderer="gammaOutput: true">
-          <a-asset-item id="piso0" src="assets/casaEevee.gltf"></a-asset-item>
+          <a-asset-item id="piso0" src="assets/casaEevee.gltf" material="transparent: true;"></a-asset-item>
         </a-assets>
 
         <a-entity light="type: hemisphere; color: #eef; groundColor: #fff; intensity: 3"></a-entity>
         <a-sky></a-sky>
-        <a-gltf-model src="#piso0"></a-gltf-model>
-        <a-entity environment="preset: forest; dressingAmount: 500"></a-entity>
+        <a-gltf-model src="#piso0" ></a-gltf-model>
+
+        <!-- <a-entity environment="preset: forest; dressingAmount: 500"></a-entity>
+         -->
         <a-entity id="camera" camera look-controls
         orbit-controls="target: 0 1.5 0; minDistance: 5.0 ; maxDistance: 180; initialPosition: 0 2.5 15; minPolarAngle:0; maxPolarAngle:90; rotateSpeed: 0.1; zoomSpeed: 1.0"></a-entity>
     </a-scene>
