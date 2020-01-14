@@ -21,10 +21,10 @@
         >
 
             <a-assets renderer="gammaOutput: true">
-                <a-asset-item id="piso0" src="assets/casaEevee.gltf" material="transparent: true;"></a-asset-item>
+                <a-asset-item id="piso0" src="assets/casaEevee.gltf"></a-asset-item>
             </a-assets>
 
-            <a-entity light="type: hemisphere; color: #eef; groundColor: #fff; intensity: 3"></a-entity>
+            <a-entity light="type: ambient; color: #eef; groundColor: #fff; intensity: 3"></a-entity>
             <a-sky></a-sky>
             <a-gltf-model id="house" src="#piso0"></a-gltf-model>
 
